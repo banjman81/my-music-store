@@ -8,6 +8,8 @@ export const removeItemFromCartAction = 'removeItemFromCart';
 
 export const emptyCartAction = 'emptyCart';
 
+export const SIGN_IN_ACTION = 'signIn';
+
 const shoppingCartReducer = (state = shoppingCartInitialState, action) => {
 
   if(action.type === addItemToCartAction){
@@ -44,9 +46,20 @@ const shoppingCartReducer = (state = shoppingCartInitialState, action) => {
   return state;
 };
 
+const userReducer = (state = null, action) => {
+  switch(action.type){
+    case SIGN_IN_ACTION:
+      return action.payload.userData
+
+    default:
+      return state
+  }
+}
+
 const store = configureStore({
   reducer: {
     shoppingCart:  shoppingCartReducer,
+    user: userReducer
   },
 })
 
